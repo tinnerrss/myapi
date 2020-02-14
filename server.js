@@ -38,8 +38,14 @@ app.post("/boozes", (req, res) => {
 
 //show
 app.get("/boozes/:id", (req, res) => {
-    db.booze.findOne
-    res.send("SHOWING ONLY ONE ALOCOHOLIC BEVERAGE AT ID" + req.params.id);
+    db.booze.findOne({
+        where: {
+            name: req.params.name
+        }
+    }).then(function(booze) {
+        res.json(booze);
+    }).catch(err => console.log("error"))
+    res.send("ERROR");
 })
 
 //udate
