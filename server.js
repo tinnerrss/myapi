@@ -38,17 +38,36 @@ app.post("/boozes", (req, res) => {
 
 //show
 app.get("/boozes/:id", (req, res) => {
+    db.booze.findOne
     res.send("SHOWING ONLY ONE ALOCOHOLIC BEVERAGE AT ID" + req.params.id);
 })
 
 //udate
 app.put("boozes/:id", (req, res) => {
-    res.send("UPDATE MY INVENTORY");
+    db.booze.update({
+        name: "Titos Liter"
+    }, {
+        where: {
+            id: 1
+        }
+    }).then(function(updated) {
+        if(updated) {
+            console.log("success!")
+        }
+    }).catch(err => console.log(err));
+      res.send("UPDATE MY INVENTORY");
 })
 
 //destroy
 app.put("/boozes/:id", (req, res) => {
-    res.send("I've drunk em..")
+    db.booze.destroy({
+        where: {
+            name: "McCallen year 10"
+        }
+    }).then(function(numDeleted) {
+        console.log("byeeeee");
+    }).catch(err => console.log(err));
+    res.send("I've drunk em..");
 })
 
 
